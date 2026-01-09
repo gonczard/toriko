@@ -272,15 +272,17 @@
     <script>
         const body = document.getElementById('main-body');
         const btn = document.getElementById('trigger');
-        
-        btn.addEventListener('mouseenter', () => body.classList.add('is-active'));
-        btn.addEventListener('mouseleave', () => body.classList.remove('is-active'));
 
-        if (!window.matchMedia('(hover: hover)').matches) {
-            setInterval(() => {
-                body.classList.toggle('is-active');
-            }, 4000);
-        }
+		const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
+        
+        if (isTouchDevice) {
+		    setInterval(() => {
+		        body.classList.toggle('is-active');
+		    }, 4000);
+		} else {
+		    btn.addEventListener('mouseenter', () => body.classList.add('is-active'));
+		    btn.addEventListener('mouseleave', () => body.classList.remove('is-active'));
+		}
     </script>
 </body>
 </html>
