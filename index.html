@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toriko ramen x chicken Białystok | Zamów Online</title>
+    
+    <link rel="icon" type="image/png" href="toriko_logo.png">
+    
+    <meta name="description" content="Najlepszy Ramen w Białymstoku. Złóż zamówienie online z szybką dostawą!">
+    <meta name="keywords" content="ramen białystok, kurczak, chicken białystok, toriko restauracja, jedzenie na dowóz, ramen online">
+
+    <script type="application/ld+json">
+	{
+	  "@context": "https://schema.org",
+	  "@type": "Restaurant",
+	  "name": "Toriko ramen x chicken",
+	  "image": "https://toriko.pl/toriko_day.jpeg",
+	  "url": "https://toriko.pl",
+	  "address": {
+	    "@type": "PostalAddress",
+	    "streetAddress": "Lipowa 16/107",
+	    "addressLocality": "Białystok",
+	    "postalCode": "15-427",
+	    "addressCountry": "PL"
+	  },
+	  "geo": {
+	    "@type": "GeoCoordinates",
+	    "latitude": 53.1337255318644, 
+	    "longitude": 23.151982115893638
+	  },
+	  "servesCuisine": ["Ramen", "Japanese", "Chicken"],
+	  "priceRange": "$$"
+	}
+    </script>
+    
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-pink: #ff00ff;
+            --glass-bg: rgba(0, 0, 0, 0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            height: 100%;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background-color: #000;
+            color: white;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center 45%;
+            transition: opacity 1.0s ease-in-out;
+            will-change: opacity;
+        }
+
+        .slide-1 {
+            z-index: 2; opacity: 1;
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('toriko_day.jpeg');
+        }
+
+        .slide-2 {
+            z-index: 3; opacity: 0;
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('toriko_night.jpeg');
+        }
+
+        body.is-active .slide-2 { opacity: 1; }
+
+        .wrapper {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo { margin-bottom: 30px; }
+        .logo img {
+            max-width: 200px;
+            height: auto;
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+            transition: filter 1.0s ease;
+            transform: translateZ(0);
+        }
+
+        body.is-active .logo img { filter: drop-shadow(0 0 15px var(--neon-pink)); }
+
+        .cta-button {
+            position: relative;
+            display: inline-block;
+            padding: 22px 55px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: transparent;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 3px solid transparent;
+            border-radius: 12px;
+            cursor: pointer;
+            letter-spacing: 4px;
+            text-align: center;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .btn-layer {
+            position: absolute;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            transition: opacity 0.8s ease-in-out;
+            color: white;
+            font-weight: 800;
+            letter-spacing: 4px;
+            will-change: opacity;
+            pointer-events: none;
+        }
+
+        .layer-blue {
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4), inset 0 0 10px rgba(0, 243, 255, 0.2);
+            text-shadow: 0 0 10px var(--neon-blue);
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .layer-pink {
+            border: 3px solid var(--neon-pink);
+            box-shadow: 0 0 40px rgba(255, 0, 255, 0.5), inset 0 0 20px rgba(255, 0, 255, 0.3);
+            text-shadow: 0 0 15px var(--neon-pink);
+            opacity: 0;
+            z-index: 3;
+        }
+
+        body.is-active .layer-blue { opacity: 0; }
+        body.is-active .layer-pink { opacity: 1; }
+
+        @media (hover: hover) {
+            .cta-button { transition: transform 0.3s ease; }
+            .cta-button:hover { transform: scale(1.05); }
+        }
+
+        .bottom-section { width: 100%; text-align: center; }
+        .address {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            transition: text-shadow 1.0s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-blue);
+            font-weight: 600;
+        }
+
+        body.is-active .address { text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px var(--neon-pink); }
+
+        footer { display: flex; justify-content: center; gap: 40px; }
+        .social-link {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: text-shadow 1.0s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-blue);
+        }
+
+        body.is-active .social-link { text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-pink); }
+
+        @media (max-width: 600px) {
+            .logo img { max-width: 150px; }
+            .cta-button { 
+                font-size: 1.1rem; 
+                width: 100%; 
+                padding: 18px; 
+                transform: none !important; 
+            }
+            .btn-layer { font-size: 1.1rem; letter-spacing: 2px; }
+            footer { gap: 20px; }
+            .social-link { font-size: 0.8rem; }
+            .address { font-size: 0.9rem; letter-spacing: 1.5px; }
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <div class="bg-container">
+        <div class="slide slide-1"></div>
+        <div class="slide slide-2"></div>
+    </div>
+
+    <div class="wrapper">
+        <main>
+        <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+	    Toriko ramen x chicken - Ramen i Kurczak Białystok, Lipowa 16/107
+	</h1>
+            <div class="logo">
+                <img src="toriko_logo.png" alt="Toriko ramen x chicken - Logo Restauracji w Białymstoku">
+            </div>
+            
+            <a href="https://toriko.pl" class="cta-button" id="trigger">
+                Złóż zamówienie
+                <span class="btn-layer layer-blue">Złóż zamówienie</span>
+                <span class="btn-layer layer-pink">Złóż zamówienie</span>
+            </a>
+        </main>
+
+        <section class="bottom-section">
+            <div class="address">UL. LIPOWA 16/107, 15-427 BIAŁYSTOK</div>
+            <footer>
+                <a href="https://www.facebook.com/profile.php?id=61584758788996" class="social-link" target="_blank">Facebook</a>
+                <a href="#" class="social-link" target="_blank">Instagram</a>
+                <a href="#" class="social-link" target="_blank">Google</a>
+            </footer>
+        </section>
+    </div>
+
+    <script>
+        const body = document.getElementById('main-body');
+        const btn = document.getElementById('trigger');
+        
+        btn.addEventListener('mouseenter', () => body.classList.add('is-active'));
+        btn.addEventListener('mouseleave', () => body.classList.remove('is-active'));
+
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            setInterval(() => {
+                body.classList.toggle('is-active');
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
