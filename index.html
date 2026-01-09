@@ -276,7 +276,7 @@
         btn.addEventListener('mouseenter', () => body.classList.add('is-active'));
         btn.addEventListener('mouseleave', () => body.classList.remove('is-active'));
 
-        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+        if (!window.matchMedia('(hover: hover)').matches) {
             setInterval(() => {
                 body.classList.toggle('is-active');
             }, 4000);
