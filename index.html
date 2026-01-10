@@ -100,12 +100,20 @@
             width: 100%;
         }
 
-        .logo { margin-bottom: 30px; }
+        .logo { 
+			margin-bottom: 30px;
+			min-height: 100px; 
+		    display: flex;
+		    align-items: center;
+		    justify-content: center;
+		}
         .logo img {
             max-width: 200px;
+			width: 200px;
             height: auto;
+			aspect-ratio: 1 / 1;
             filter: drop-shadow(0 0 15px var(--neon-blue));
-            transition: filter 1.0s ease;
+            transition: filter 0.4s ease;
             transform: translateZ(0);
         }
 
@@ -198,7 +206,13 @@
         body.is-active .social-link { text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-pink); }
 
         @media (max-width: 600px) {
-            .logo img { max-width: 150px; }
+			.logo {
+		        min-height: 80px;
+		    }
+            .logo img { 
+				max-width: 150px;
+				width: 150px;
+			}
             .cta-button { 
                 font-size: 1.1rem; 
                 width: 100%; 
@@ -249,7 +263,7 @@
 	    Toriko ramen x chicken - Ramen i Kurczak Białystok, Lipowa 16/107
 	</h1>
             <div class="logo">
-                <img src="toriko_logo.webp" alt="Toriko ramen x chicken - Logo Restauracji w Białymstoku">
+                <img src="toriko_logo.webp" alt="Toriko ramen x chicken - Logo Restauracji w Białymstoku" width="200" height="200">
             </div>
             
             <a href="https://toriko.pl" class="cta-button" id="trigger">
