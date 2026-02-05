@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Toriko ramen x chicken Białystok | Zamów Online</title>
-    
+
     <link rel="icon" type="image/webp" href="toriko_logo.webp">
-    
+
     <meta name="description" content="Najlepszy Ramen i kurczak z Rożna w Białymstoku!">
     <meta name="keywords" content="ramen białystok, kurczak, kurczak premium, kurczak białystok, kurczak online, toriko restauracja, jedzenie na dowóz, ramen online, kurczak z rożna">
 
-	<meta property="og:type" content="website">
+    <meta property="og:type" content="website">
 	<meta property="og:url" content="https://toriko.pl/">
 	<meta property="og:title" content="Toriko ramen x chicken | Białystok, Lipowa 16/107">
 	<meta property="og:description" content="Najlepszy Ramen i kurczak z Rożna w Białymstoku!">
@@ -32,46 +32,107 @@
 	  },
 	  "geo": {
 	    "@type": "GeoCoordinates",
-	    "latitude": 53.1337255318644, 
+	    "latitude": 53.1337255318644,
 	    "longitude": 23.151982115893638
 	  },
 	  "servesCuisine": ["Ramen", "Japanese", "Chicken"],
 	  "priceRange": "$$"
 	}
     </script>
-    
+
     <style>
         :root {
             --neon-blue: #00f3ff;
             --neon-pink: #ff00ff;
             --glass-bg: rgba(0, 0, 0, 0.6);
+            --glass-bg-light: rgba(0, 0, 0, 0.4);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body, html {
-            min-height: 100dvh;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+            border: none;
+        }
+
+        ::-webkit-scrollbar-track-piece {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        ::-webkit-scrollbar-button,
+        ::-webkit-scrollbar-button:vertical:start:decrement,
+        ::-webkit-scrollbar-button:vertical:end:increment,
+        ::-webkit-scrollbar-button:vertical:start:increment,
+        ::-webkit-scrollbar-button:vertical:end:decrement {
+            display: none !important;
+            width: 0 !important;
+            height: 0 !important;
+            background: transparent !important;
+        }
+
+        ::-webkit-scrollbar-corner {
+            background: transparent;
+        }
+
+        /* Firefox scrollbar */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
             font-family: 'Segoe UI', Roboto, sans-serif;
             background-color: #000;
             color: white;
-			overflow-x: hidden;
-    		overflow-y: auto;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Background */
         .bg-container {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            height: 100lvh;
             z-index: 1;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .slide {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
-            background-position: center 35%;
+            background-position: center 3%;
             transition: opacity 1.0s ease-in-out;
             will-change: opacity;
+            background-attachment: scroll;
         }
 
         .slide-1 {
@@ -86,10 +147,128 @@
 
         body.is-active .slide-2 { opacity: 1; }
 
+        /* Burger Menu */
+        .burger-menu {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            cursor: pointer;
+            padding: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 8px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            transition: border-color 1s ease, box-shadow 1s ease;
+        }
+
+        body.is-active .burger-menu {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+        }
+
+        .burger-menu span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .burger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .burger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 999;
+            padding: 80px 30px 30px;
+            transition: left 0.3s ease, border-right-color 1s ease, box-shadow 1s ease;
+            border-right: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+        }
+
+        body.is-active .mobile-nav {
+            border-right-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+        }
+
+        .mobile-nav.active {
+            left: 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: color 0.3s ease, padding-left 0.3s ease;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--neon-blue);
+            padding-left: 10px;
+        }
+
+        body.is-active .mobile-nav a:hover {
+            color: var(--neon-pink);
+        }
+
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Main Wrapper */
         .wrapper {
             position: relative;
             z-index: 10;
-            min-height: 100dvh;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -97,27 +276,33 @@
             padding: 40px 20px;
         }
 
-        main {
+        .hero-main {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 100%;
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
         }
 
-        .logo { 
-			margin-bottom: 10px;
-			min-height: 100px; 
-		    display: flex;
-		    align-items: center;
-		    justify-content: center;
-		}
+        .hero-cta {
+            transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        }
+
         .logo img {
             max-width: 250px;
-			width: 250px;
+            width: 250px;
             height: auto;
-			aspect-ratio: 1 / 1;
+            aspect-ratio: 1 / 1;
             filter: drop-shadow(0 0 15px var(--neon-blue));
             transition: filter 1.0s ease;
             transform: translateZ(0);
@@ -125,6 +310,7 @@
 
         body.is-active .logo img { filter: drop-shadow(0 0 15px var(--neon-pink)); }
 
+        /* Buttons */
         .cta-button {
             position: relative;
             display: inline-block;
@@ -144,6 +330,17 @@
             text-align: center;
             transform: translateZ(0);
             backface-visibility: hidden;
+        }
+
+        .cta-button-small {
+            padding: 16px 32px;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+        }
+
+        .cta-button-small .btn-layer {
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
         }
 
         .btn-layer {
@@ -185,7 +382,11 @@
             .cta-button:hover { transform: scale(1.05); }
         }
 
-        .bottom-section { width: 100%; text-align: center; }
+        .bottom-section {
+            width: 100%;
+            text-align: center;
+            transition: opacity 0.2s ease-out;
+        }
         .address {
             margin-bottom: 25px;
             font-size: 1.1rem;
@@ -211,50 +412,695 @@
 
         body.is-active .social-link { text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-pink); }
 
+        /* Content Sections */
+        .content-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            scroll-margin-top: 70px;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transition: opacity 0.8s ease-out;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1;
+        }
+
+        /* Instant reveal without animation */
+        .fade-in-section.instant-visible,
+        .fade-in-section.instant-visible .menu-card,
+        .fade-in-section.instant-visible .step,
+        .fade-in-section.instant-visible .column-card,
+        .fade-in-section.instant-visible .reason,
+        .fade-in-section.instant-visible .faq-item {
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+        }
+
+        .fade-in-section.visible .menu-card,
+        .fade-in-section.visible .step,
+        .fade-in-section.visible .column-card,
+        .fade-in-section.visible .reason,
+        .fade-in-section.visible .faq-item {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .fade-in-section.visible .menu-card:nth-child(1),
+        .fade-in-section.visible .step:nth-child(1),
+        .fade-in-section.visible .column-card:nth-child(1),
+        .fade-in-section.visible .reason:nth-child(1),
+        .fade-in-section.visible .faq-item:nth-child(1) { animation-delay: 0.1s; }
+
+        .fade-in-section.visible .menu-card:nth-child(2),
+        .fade-in-section.visible .step:nth-child(2),
+        .fade-in-section.visible .column-card:nth-child(2),
+        .fade-in-section.visible .reason:nth-child(2),
+        .fade-in-section.visible .faq-item:nth-child(2) { animation-delay: 0.25s; }
+
+        .fade-in-section.visible .step:nth-child(3),
+        .fade-in-section.visible .reason:nth-child(3),
+        .fade-in-section.visible .faq-item:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 0 0 20px var(--neon-blue);
+            transition: text-shadow 1s ease;
+        }
+
+        body.is-active .section-title {
+            text-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        .section-title + .section-subtitle {
+            margin-top: -35px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+
+        /* Section: Co u nas zjesz */
+        .menu-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border-left: 4px solid var(--neon-blue);
+            padding: 35px 30px;
+            transition: border-color 1s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        body.is-active .menu-card {
+            border-left-color: var(--neon-pink);
+        }
+
+        .menu-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .menu-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.85;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .menu-card .cta-button-small {
+            align-self: center;
+        }
+
+        /* Section: Jak zamawiasz */
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            transition: border-color 1s ease;
+        }
+
+        body.is-active .step {
+            border-color: rgba(255, 0, 255, 0.3);
+        }
+
+        .step-number {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background: transparent;
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-right: 20px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+            transition: border-color 1s ease, color 1s ease, text-shadow 1s ease, box-shadow 1s ease;
+        }
+
+        body.is-active .step-number {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        }
+
+        .step-content h4 {
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            opacity: 0.85;
+            font-size: 0.95rem;
+        }
+
+        /* Section: Wybierasz baze */
+        .columns-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 20px;
+        }
+
+        .column-card {
+            flex: 1;
+            min-width: 350px;
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border-left: 4px solid var(--neon-blue);
+            padding: 35px 30px;
+            scroll-snap-align: start;
+            transition: border-color 1s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.is-active .column-card {
+            border-left-color: var(--neon-pink);
+        }
+
+        .column-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .column-card .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .menu-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .menu-list li {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+
+        .menu-icon {
+            width: 24px;
+            min-width: 24px;
+            margin-right: 12px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .highlight-text {
+            font-style: italic;
+            opacity: 0.7;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .column-card .cta-button-small {
+            margin-top: auto;
+            align-self: center;
+        }
+
+        /* Section: Dlaczego ToriKo */
+        .reasons-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .reason {
+            padding: 25px;
+            padding-left: 50px;
+            margin-bottom: 20px;
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border-left: 4px solid var(--neon-blue);
+            transition: border-color 1s ease;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .reason::before {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--neon-blue);
+            transition: background 1s ease, box-shadow 1s ease;
+        }
+
+        body.is-active .reason::before {
+            background: var(--neon-pink);
+            box-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        body.is-active .reason {
+            border-left-color: var(--neon-pink);
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: var(--glass-bg-light);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            transition: border-color 1s ease;
+        }
+
+        body.is-active .faq-item {
+            border-color: rgba(255, 0, 255, 0.3);
+        }
+
+        .faq-question {
+            padding: 20px 25px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding: 0 25px 20px;
+        }
+
+        .faq-answer p {
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px var(--neon-blue);
+            transition: text-shadow 1s ease;
+        }
+
+        body.is-active .final-cta h2 {
+            text-shadow: 0 0 20px var(--neon-pink);
+        }
+
+        /* Footer Section */
+        .footer-section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
         @media (max-width: 600px) {
-			.logo {
-		        min-height: 80px;
-		    }
-            .logo img { 
-				max-width: 200px;
-				width: 200px;
-			}
-            .cta-button { 
-                font-size: 1.1rem; 
-                width: 100%; 
-                padding: 18px; 
-                transform: none !important; 
+            .footer-section {
+                padding-bottom: 80px;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, border-color 1s ease, box-shadow 1s ease, transform 0.2s ease;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.1);
+        }
+
+        body.is-active .scroll-top {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+        }
+
+        .scroll-top::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            border-left: 2px solid var(--neon-blue);
+            border-top: 2px solid var(--neon-blue);
+            transform: rotate(45deg);
+            margin-top: 4px;
+            transition: border-color 1s ease;
+        }
+
+        body.is-active .scroll-top::before {
+            border-color: var(--neon-pink);
+        }
+
+        /* Scroll down indicator */
+        .scroll-down {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            cursor: pointer;
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .scroll-down.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-down-text {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+            transition: color 1s ease, text-shadow 1s ease;
+        }
+
+        body.is-active .scroll-down-text {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        .scroll-down-arrows {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .scroll-down-arrows span {
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-right: 2px solid var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+            transform: rotate(45deg);
+            animation: scrollArrow 1.5s infinite;
+            opacity: 0;
+            transition: border-color 1s ease;
+        }
+
+        .scroll-down-arrows span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .scroll-down-arrows span:nth-child(2) {
+            animation-delay: 0.2s;
+            margin-top: -8px;
+        }
+
+        body.is-active .scroll-down-arrows span {
+            border-color: var(--neon-pink);
+        }
+
+        @keyframes scrollArrow {
+            0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+        }
+
+        @media (max-width: 600px) {
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 44px;
+                height: 44px;
+            }
+
+            .scroll-down {
+                bottom: 140px;
+                right: auto;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 18px 20px;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+            transition: transform 0.3s ease;
+        }
+
+        .desktop-nav.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-blue);
+            transition: text-shadow 1s ease, transform 0.2s ease;
+        }
+
+        body.is-active .nav-links a {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--neon-pink);
+        }
+
+        .nav-links a:hover {
+            transform: scale(1.05);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px var(--neon-blue);
+        }
+
+        body.is-active .nav-links a:hover {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px var(--neon-pink);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+
+            .burger-menu, .mobile-nav, .nav-overlay {
+                display: block;
+            }
+
+            .menu-cards {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .menu-card {
+                padding: 25px 20px;
+            }
+
+            .columns-container {
+                gap: 15px;
+                margin: 0 -20px;
+                padding: 0 20px 20px;
+            }
+
+            .column-card {
+                min-width: 85vw;
+                padding: 25px 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .content-section {
+                padding: 60px 20px;
+            }
+
+            .final-cta h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                min-height: 80px;
+            }
+            .logo img {
+                max-width: 200px;
+                width: 200px;
+            }
+            .cta-button {
+                font-size: 1.1rem;
+                width: 100%;
+                padding: 18px;
+                transform: none !important;
             }
             .btn-layer { font-size: 1.1rem; letter-spacing: 2px; }
             .social-link { font-size: 0.8rem; }
             .address { font-size: 0.9rem; letter-spacing: 1.5px; }
 
-			.wrapper {
-		        padding: 30px 15px 20px 15px;
-		        justify-content: flex-start;
-		    }
+            .hero {
+                padding: 30px 15px 20px;
+                justify-content: flex-start;
+            }
+            .hero-main {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: 20px 0;
+            }
 
-			main {
-		        flex-grow: 1; 
-		        display: flex;
-		        flex-direction: column;
-		        justify-content: center;
-		        margin: 20px 0;
-		    }
+            .bottom-section {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                width: 100%;
+            }
 
-			.bottom-section {
-		        padding-top: 20px;
-		        padding-bottom: 20px;
-		        width: 100%;
-		    }
+            footer {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
 
-			footer {
-		        flex-wrap: wrap;
-		        gap: 15px;
-		    }
+            .step {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
         }
     </style>
-	
+
 </head>
 <body id="main-body">
 
@@ -263,46 +1109,480 @@
         <div class="slide slide-2"></div>
     </div>
 
-    <div class="wrapper">
-        <main>
-        <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
-	    	Toriko ramen x chicken - Ramen i Kurczak Białystok, Lipowa 16/107
-		</h1>
-            <div class="logo">
-                <img src="toriko_logo.webp" alt="Toriko ramen x chicken - Logo Restauracji w Białymstoku" width="250" height="250">
-            </div>
-            
-            <a href="https://toriko.pl" class="cta-button" id="trigger">
-                Złóż zamówienie
-                <span class="btn-layer layer-blue">Złóż zamówienie</span>
-                <span class="btn-layer layer-pink">Złóż zamówienie</span>
-            </a>
-        </main>
+    <!-- Burger Menu (Mobile) -->
+    <div class="burger-menu" id="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
-        <section class="bottom-section">
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#start">Start</a>
+        <a href="#menu">Co u nas zjesz?</a>
+        <a href="#jak-zamawiasz">Jak zamawiasz?</a>
+        <a href="#wybierz">Wybierz bazę</a>
+        <a href="#dlaczego">Dlaczego ToriKo?</a>
+        <a href="#faq">FAQ</a>
+        <a href="#zamow">Zamów teraz</a>
+    </nav>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop" aria-label="Przewiń na górę"></button>
+
+    <!-- Scroll down indicator -->
+    <div class="scroll-down visible" id="scrollDown">
+        <span class="scroll-down-text">Przewiń</span>
+        <div class="scroll-down-arrows">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <header class="desktop-nav" id="desktopNav">
+        <nav class="nav-links">
+            <a href="#menu">Menu</a>
+            <a href="#jak-zamawiasz">Jak zamawiasz?</a>
+            <a href="#dlaczego">Dlaczego my?</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <!-- Hero Section -->
+        <section class="hero" id="start">
+            <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+                Toriko ramen x chicken - Ramen i Kurczak Białystok, Lipowa 16/107
+            </h1>
+
+            <div class="hero-main">
+                <div class="logo" id="logo">
+                    <img src="toriko_logo.webp" alt="Toriko ramen x chicken - Logo Restauracji w Białymstoku" width="250" height="250">
+                </div>
+
+                <a href="https://toriko.pl" class="cta-button hero-cta" id="trigger">
+                    Złóż zamówienie
+                    <span class="btn-layer layer-blue">Złóż zamówienie</span>
+                    <span class="btn-layer layer-pink">Złóż zamówienie</span>
+                </a>
+            </div>
+
+            <section class="bottom-section">
+                <div class="address">UL. LIPOWA 16/107, 15-427 BIAŁYSTOK</div>
+                <footer>
+                    <a href="https://www.facebook.com/profile.php?id=61584758788996" class="social-link" target="_blank">Facebook</a>
+                    <a href="https://www.instagram.com/toriko_ramen_x_chicken" class="social-link" target="_blank">Instagram</a>
+                    <a href="#" class="social-link" target="_blank">Google</a>
+                </footer>
+            </section>
+
+        </section>
+
+        <!-- Section: Co u nas zjesz? -->
+        <section class="content-section fade-in-section" id="menu">
+            <h2 class="section-title">Co u nas zjesz?</h2>
+            <p class="section-subtitle">Kilka dań, ale to Ty wybierasz smak</p>
+
+            <div class="menu-cards">
+                <div class="menu-card">
+                    <div>
+                        <h3>Kurczak z&nbsp;rożna</h3>
+                        <p>Jeden sielski kurczak w&nbsp;kilku wersjach z&nbsp;autorskimi sosami. Ty komponujesz danie - dodając dodatki.</p>
+                    </div>
+                    <a href="https://toriko.pl" class="cta-button cta-button-small">
+                        Zamów
+                        <span class="btn-layer layer-blue">Zamów</span>
+                        <span class="btn-layer layer-pink">Zamów</span>
+                    </a>
+                </div>
+
+                <div class="menu-card">
+                    <div>
+                        <h3>Ramen</h3>
+                        <p>Makaron robiony u&nbsp;nas. Z&nbsp;bulionem albo tylko z&nbsp;sosem.</p>
+                    </div>
+                    <a href="https://toriko.pl" class="cta-button cta-button-small">
+                        Zamów
+                        <span class="btn-layer layer-blue">Zamów</span>
+                        <span class="btn-layer layer-pink">Zamów</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Jak zamawiasz -->
+        <section class="content-section fade-in-section" id="jak-zamawiasz">
+            <h2 class="section-title">Jak zamawiasz?</h2>
+            <p class="section-subtitle">3 kroki do jedzenia</p>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Wybierz danie: Kurczak Teriyaki, Kurczak Sweet Chili, Kurczak BBQ</h4>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Dodaj wybrane dodatki</h4>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Odbierz lub zamów z&nbsp;dostawą</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="https://toriko.pl" class="cta-button cta-button-small">
+                    Przejdź do zamówienia
+                    <span class="btn-layer layer-blue">Przejdź do zamówienia</span>
+                    <span class="btn-layer layer-pink">Przejdź do zamówienia</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section: Wybierasz bazę -->
+        <section class="content-section fade-in-section" id="wybierz">
+            <h2 class="section-title">Wybierasz bazę. Resztę dopasowujesz pod&nbsp;siebie.</h2>
+
+            <div class="columns-container">
+                <div class="column-card">
+                    <h3>Kurczak z&nbsp;rożna z&nbsp;autorskimi sosami</h3>
+                    <p class="subtitle">Do wyboru nóżka podudzie lub pierś ze skrzydełkiem z&nbsp;ryżem lub makaronem.</p>
+
+                    <ul class="menu-list">
+                        <li>
+                            <span class="menu-icon">🍗</span>
+                            Kurczak Teriyaki
+                        </li>
+                        <li>
+                            <span class="menu-icon">🍗</span>
+                            Kurczak Sweet Chili
+                        </li>
+                        <li>
+                            <span class="menu-icon">🍗</span>
+                            Kurczak BBQ
+                        </li>
+                    </ul>
+
+                    <p class="highlight-text">Jeden składnik, ale w&nbsp;wielu wariantach.</p>
+
+                    <a href="https://toriko.pl" class="cta-button cta-button-small">
+                        Skomponuj swoje danie
+                        <span class="btn-layer layer-blue">Skomponuj swoje danie</span>
+                        <span class="btn-layer layer-pink">Skomponuj swoje danie</span>
+                    </a>
+                </div>
+
+                <div class="column-card">
+                    <h3>Ramen albo dry ramen</h3>
+                    <p class="subtitle">&nbsp;</p>
+
+                    <ul class="menu-list">
+                        <li>
+                            <span class="menu-icon">🍜</span>
+                            Ramen - klasyczna zupa
+                        </li>
+                        <li>
+                            <span class="menu-icon">🍜</span>
+                            Dry ramen - makaron + sos
+                        </li>
+                    </ul>
+
+                    <p class="highlight-text">Makaron robiony na miejscu.</p>
+
+                    <a href="https://toriko.pl" class="cta-button cta-button-small">
+                        Skomponuj swoje danie
+                        <span class="btn-layer layer-blue">Skomponuj swoje danie</span>
+                        <span class="btn-layer layer-pink">Skomponuj swoje danie</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Dlaczego ToriKo? -->
+        <section class="content-section fade-in-section" id="dlaczego">
+            <h2 class="section-title">Dlaczego ToriKo?</h2>
+
+            <div class="reasons-list">
+                <div class="reason">
+                    Bo wiemy, co wrzucamy do miski i&nbsp;nie idziemy na skróty.
+                </div>
+                <div class="reason">
+                    Używamy sielskiego, zdrowego kurczaka i&nbsp;sprawdzonych składników.
+                </div>
+                <div class="reason">
+                    Sosy robimy u&nbsp;siebie, tak samo jak makaron do ramenu.
+                </div>
+                <div class="reason">
+                    Krótka karta, zero gotowców i&nbsp;super szybki serwis, bez długiego czekania.
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="content-section fade-in-section" id="faq">
+            <h2 class="section-title">FAQ</h2>
+            <p class="section-subtitle">Najczęstsze pytania</p>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">Czy mogę modyfikować dania?</div>
+                    <div class="faq-answer">
+                        <p>Tak. Wybierasz sos i&nbsp;dodatki.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Czy sosy są ostre?</div>
+                    <div class="faq-answer">
+                        <p>Są różne poziomy ostrości. Wybór należy do Ciebie.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">Jak długo czeka się na zamówienie?</div>
+                    <div class="faq-answer">
+                        <p>Mamy szybki serwis. Wpadasz, zamawiasz i&nbsp;jesz.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="final-cta fade-in-section" id="zamow">
+            <h2>GŁODNY? To już wiesz co robić.</h2>
+            <a href="https://toriko.pl" class="cta-button">
+                Zamów teraz
+                <span class="btn-layer layer-blue">Zamów teraz</span>
+                <span class="btn-layer layer-pink">Zamów teraz</span>
+            </a>
+        </section>
+
+        <!-- Footer -->
+        <section class="footer-section">
             <div class="address">UL. LIPOWA 16/107, 15-427 BIAŁYSTOK</div>
             <footer>
                 <a href="https://www.facebook.com/profile.php?id=61584758788996" class="social-link" target="_blank">Facebook</a>
                 <a href="https://www.instagram.com/toriko_ramen_x_chicken" class="social-link" target="_blank">Instagram</a>
-				<a href="#" class="social-link" target="_blank">Google</a>
+                <a href="#" class="social-link" target="_blank">Google</a>
             </footer>
         </section>
     </div>
 
     <script>
         const body = document.getElementById('main-body');
-        const btn = document.getElementById('trigger');
+        const burger = document.getElementById('burger');
+        const mobileNav = document.getElementById('mobileNav');
+        const navOverlay = document.getElementById('navOverlay');
+        const navLinks = mobileNav.querySelectorAll('a');
 
-		const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
-        
+        // Neon effect on hover for all CTA buttons
+        const allCtaButtons = document.querySelectorAll('.cta-button');
+        allCtaButtons.forEach(btn => {
+            btn.addEventListener('mouseenter', () => body.classList.add('is-active'));
+            btn.addEventListener('mouseleave', () => body.classList.remove('is-active'));
+        });
+
+        const isTouchDevice = window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 1024;
+
+        // Auto toggle on mobile
         if (isTouchDevice) {
 		    setInterval(() => {
 		        body.classList.toggle('is-active');
 		    }, 4000);
-		} else {
-		    btn.addEventListener('mouseenter', () => body.classList.add('is-active'));
-		    btn.addEventListener('mouseleave', () => body.classList.remove('is-active'));
 		}
+
+        // Burger menu toggle
+        function toggleMenu() {
+            burger.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            navOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        burger.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking nav links
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileNav.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Reveal all sections on nav click for accurate scroll position
+        const allNavLinks = document.querySelectorAll('.nav-links a, .mobile-nav a');
+        const allFadeInSections = document.querySelectorAll('.fade-in-section');
+
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                // Reveal sections up to and including target (without animation)
+                let reachedTarget = false;
+                allFadeInSections.forEach(section => {
+                    if (!reachedTarget) {
+                        section.classList.add('visible', 'instant-visible');
+                    }
+                    if (section === targetSection || section.contains(targetSection) || targetSection.contains(section)) {
+                        reachedTarget = true;
+                        section.classList.add('visible', 'instant-visible');
+                    }
+                });
+
+                // Also check if target is the section itself
+                if (targetSection && targetSection.classList.contains('fade-in-section')) {
+                    targetSection.classList.add('visible', 'instant-visible');
+                }
+
+                // Scroll after layout update
+                setTimeout(() => {
+                    if (targetSection) {
+                        targetSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 10);
+            });
+        });
+
+
+        // FAQ Accordion
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Scroll effects
+        const heroSection = document.querySelector('.hero');
+        const heroMain = document.querySelector('.hero-main');
+        const bottomSection = document.querySelector('.hero .bottom-section');
+        const bgContainer = document.querySelector('.bg-container');
+        const desktopNav = document.getElementById('desktopNav');
+        const scrollTopBtn = document.getElementById('scrollTop');
+        const scrollDownBtn = document.getElementById('scrollDown');
+        let lastScrollY = window.scrollY;
+
+        // Scroll to top button click
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll down button click
+        scrollDownBtn.addEventListener('click', () => {
+            const menuSection = document.getElementById('menu');
+            if (menuSection) {
+                menuSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        let ticking = false;
+
+        function updateOnScroll() {
+            const currentScrollY = window.scrollY;
+            const heroHeight = heroSection.offsetHeight;
+            const scrollProgress = Math.min(currentScrollY / (heroHeight * 0.7), 1);
+
+            // Hero content fade (all elements at same rate)
+            const heroOpacity = 1 - scrollProgress;
+            const heroTranslate = currentScrollY * 0.2;
+
+            if (heroMain) {
+                heroMain.style.opacity = Math.max(heroOpacity, 0);
+                heroMain.style.transform = `translateY(${heroTranslate}px)`;
+            }
+
+            if (bottomSection) {
+                bottomSection.style.opacity = Math.max(heroOpacity, 0);
+                bottomSection.style.transform = `translateY(${heroTranslate}px)`;
+            }
+
+            // Background darkening effect
+            if (bgContainer) {
+                const maxDarken = 0.5;
+                const darkenProgress = Math.min(currentScrollY / (heroHeight * 0.8), 1);
+                const darkenAmount = darkenProgress * maxDarken;
+                bgContainer.style.filter = `brightness(${1 - darkenAmount})`;
+            }
+
+            // Nav show/hide
+            if (currentScrollY > heroHeight * 0.5) {
+                if (currentScrollY < lastScrollY) {
+                    // Scrolling up - show nav
+                    desktopNav.classList.remove('hidden');
+                } else if (currentScrollY > lastScrollY + 5) {
+                    // Scrolling down - hide nav
+                    desktopNav.classList.add('hidden');
+                }
+            } else {
+                // In hero area - always show nav
+                desktopNav.classList.remove('hidden');
+            }
+
+            // Scroll buttons show/hide
+            const isMobile = window.innerWidth <= 600;
+            const scrollThreshold = isMobile ? heroHeight * 0.2 : heroHeight * 0.5;
+
+            if (currentScrollY > scrollThreshold) {
+                scrollTopBtn.classList.add('visible');
+                scrollDownBtn.classList.remove('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+                scrollDownBtn.classList.add('visible');
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        });
+
+        // Intersection Observer for fade-in sections
+        const fadeInSections = document.querySelectorAll('.fade-in-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        fadeInSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
     </script>
 </body>
 </html>
